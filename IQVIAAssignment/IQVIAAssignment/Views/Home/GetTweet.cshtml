@@ -19,12 +19,9 @@
     columns.Add(c => c.Year).Titled("Year").Filterable(true).Sortable(true);
     columns.Add(c => c.Month).Titled("Month").Filterable(true).Sortable(true);
     columns.Add(c => c.Day).Titled("Date").Filterable(true).Sortable(true);
+    columns.Add(c => c.Time).Titled("Time").Filterable(false).Sortable(true);
     columns.Add(c => c.Description).Titled("Description").Filterable(false).Sortable(false);
-    //columns.Add()
-    //.Encoded(false)
-    //.Sanitized(false)
-    //.SetWidth(30)
-    //.RenderValueAs(o => Html.ActionLink("Edit", "Edit", new { id = o.Year }));
+    
 
 }).WithPaging(10)
 </div>

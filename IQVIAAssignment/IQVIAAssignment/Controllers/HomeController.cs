@@ -56,25 +56,26 @@ namespace IQVIAAssignment.Controllers
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                     //Sending request to find web api REST service resource GetTweets using HttpClient  
-                    HttpResponseMessage Res = await client.GetAsync("api/v1/Tweets?startDate=" + Startdate + "&endDate=" + Enddate);
+                    HttpResponseMessage Response = await client.GetAsync("api/v1/Tweets?startDate=" + Startdate + "&endDate=" + Enddate);
 
                     //Checking the response is successful or not which is sent using HttpClient  
-                    if (Res.IsSuccessStatusCode)
+                    if (Response.IsSuccessStatusCode)
                     {
                         //Storing the response details recieved from web api   
-                        var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+                        var TweetResponse = Response.Content.ReadAsStringAsync().Result;
 
-                        //Deserializing the response recieved from web api and storing into the Employee list  
-                        list = JsonConvert.DeserializeObject<List<Tweet>>(EmpResponse);
+                        //Deserializing the response recieved from web api and storing into the Tweet list  
+                        list = JsonConvert.DeserializeObject<List<Tweet>>(TweetResponse);
                         list = list.OrderBy(o => o.stamp).ToList();
-                        //var result = list.Distinct(new ItemEqualityComparer());
-                        var result = list.Distinct();
+                        var result = list.Distinct(new ItemEqualityComparer());
+                        
                         foreach (var item in result)
                         {
                             TweetDetailsViewModel objTweet = new TweetDetailsViewModel();
                             objTweet.Year = DateTime.Parse(item.stamp.ToString()).Year;
                             objTweet.Month = DateTime.Parse(item.stamp.ToString()).Month;
                             objTweet.Day = DateTime.Parse(item.stamp.ToString()).Day;
+                            objTweet.Time = DateTime.Parse(item.stamp.ToString()).TimeOfDay;
                             objTweet.Description = item.text;
                             tweets.Add(objTweet);
                         }
