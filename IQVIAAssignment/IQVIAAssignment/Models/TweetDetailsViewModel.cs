@@ -8,7 +8,7 @@ namespace IQVIAAssignment.Models
     public class TweetDetailsViewModel
     {
         public int Year { get; set; }
-        public int Month { get; set; }
+        public string Month { get; set; }
         public int Day { get; set; }
 
         public  TimeSpan Time { get; set; }

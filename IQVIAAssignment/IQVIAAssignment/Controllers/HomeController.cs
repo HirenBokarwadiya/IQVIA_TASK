@@ -3,6 +3,7 @@ using IQVIAAssignment.Utility;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -73,7 +74,8 @@ namespace IQVIAAssignment.Controllers
                         {
                             TweetDetailsViewModel objTweet = new TweetDetailsViewModel();
                             objTweet.Year = DateTime.Parse(item.stamp.ToString()).Year;
-                            objTweet.Month = DateTime.Parse(item.stamp.ToString()).Month;
+                            objTweet.Month = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.Parse(item.stamp.ToString()).Month);
+
                             objTweet.Day = DateTime.Parse(item.stamp.ToString()).Day;
                             objTweet.Time = DateTime.Parse(item.stamp.ToString()).TimeOfDay;
                             objTweet.Description = item.text;
